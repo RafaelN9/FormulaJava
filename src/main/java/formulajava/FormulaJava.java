@@ -5,6 +5,8 @@
 
 package formulajava;
 
+import formulajava.Interface.Menu;
+
 /**
  *
  * @author joaov
@@ -12,6 +14,6 @@ package formulajava;
 public class FormulaJava {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Menu.main(args);
     }
 }
