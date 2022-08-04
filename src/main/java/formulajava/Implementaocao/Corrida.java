@@ -12,7 +12,7 @@ import java.util.Iterator;
  *
  * @author joaov
  */
-public class Corrida {
+public class Corrida{
 
     private int qtdCarros;
     private ArrayList<Carros> carros = new ArrayList<Carros>();
@@ -40,16 +40,18 @@ public class Corrida {
         Carros.setPos(0);
     }
 
-    public void start() {
+    public void start() throws InterruptedException {
         System.out.println("\n----------------- Corrida comecou -----------------\n");
         setStatics();
-        while (Carros.getFinish() < this.qtdCarros) {
             for (Iterator<Carros> iterator = carros.iterator(); iterator.hasNext();) {
                 Carros next = iterator.next();
-                if(next.getPosChegada() == 0)
-                    next.acelera();
+                    next.start();
             }
-        }
+        
+            for (Iterator<Carros> iterator = carros.iterator(); iterator.hasNext();) {
+                Carros next = iterator.next();
+                    next.join();
+            }
         System.out.println("\n----------------- Corrida terminou -----------------\n");
     }
 }
