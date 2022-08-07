@@ -12,7 +12,7 @@ import java.util.Iterator;
  *
  * @author joaov
  */
-public class Corrida{
+public class Corrida {
 
     private int qtdCarros;
     private ArrayList<Carros> carros = new ArrayList<Carros>();
@@ -28,11 +28,34 @@ public class Corrida{
         for (int i = 1; i <= qtdCarros; i++) {
             Carros car = new Carros(i);
             this.carros.add(car);
+
         }
         setStatics();
     }
-    
-    public void setStatics(){
+
+    public String[] top3() {
+        String[] chegada = new String[3];
+        this.carros.forEach(carro -> {
+            int pos = carro.getPosChegada();
+            switch (pos) {
+                case 1:
+                    chegada[0] = Integer.toString(carro.getIndice());
+                    break;
+                case 2:
+                    chegada[1] = Integer.toString(carro.getIndice());
+
+                    break;
+                case 3:
+                    chegada[2] = Integer.toString(carro.getIndice());
+
+                    break;
+                default:
+            }
+        });
+        return chegada;
+    }
+
+    public void setStatics() {
         Carros.setpAbastece(this.pAbastece);
         Carros.setpQuebra(this.pQuebra);
         Carros.setQtdVoltas(this.qtdVoltas);
@@ -40,18 +63,17 @@ public class Corrida{
         Carros.setPos(0);
     }
 
-    public void start() throws InterruptedException {
-        System.out.println("\n----------------- Corrida comecou -----------------\n");
+    public String start() throws InterruptedException {
+
         setStatics();
             for (Iterator<Carros> iterator = carros.iterator(); iterator.hasNext();) {
                 Carros next = iterator.next();
                     next.start();
             }
-        
             for (Iterator<Carros> iterator = carros.iterator(); iterator.hasNext();) {
                 Carros next = iterator.next();
                     next.join();
             }
-        System.out.println("\n----------------- Corrida terminou -----------------\n");
+        return Carros.getMsg();
     }
 }

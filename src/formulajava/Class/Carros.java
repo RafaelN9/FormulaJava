@@ -8,12 +8,21 @@ package formulajava.Class;
  *
  * @author joaov
  */
-public class Carros extends Thread {
+public class Carros extends Thread{
 
     private int indice;
     private int volta;
     private int posChegada;
+    
+    private static String msg;
 
+    public static String getMsg() {
+        return msg;
+    }
+
+    public static void setMsg(String msg) {
+        Carros.msg += msg;
+    }
     private static int pos;
     private static float pQuebra;
     private static float pAbastece;
@@ -28,36 +37,33 @@ public class Carros extends Thread {
 
     @Override
     public void run() {
-        
         while (this.posChegada == 0) {
-            if (this.posChegada != -1) {
-                if (this.volta == Carros.getQtdVoltas()) {
-                    Carros.setPos(Carros.getPos() + 1);
-                    this.posChegada = Carros.getPos();
-                    Carros.setFinish(Carros.getFinish() + 1);
-                    System.out.println("Carro " + this.indice + " chegou na posicao " + this.posChegada);
-
-                } else {
-                    boolean abastece = pausaAbastecimento();
-                    boolean quebra = pausaQuebra();
-                    if (!abastece && !quebra) {
-                        this.volta++;
-                        System.out.println("Carro " + this.indice + " acelerou e esta na volta " + this.volta);
-                    } else {
-                        if (abastece) {
-                            System.out.println("Carro " + this.indice + " parou para abastecer na volta " + this.volta);
-                            Thread.yield();
-                        }
-                        if (quebra) {
-                            System.out.println("Carro " + this.indice + " quebrou na volta " + this.volta);
-                        }
-                    }
-
+        if(this.posChegada != -1){
+        if (this.volta == Carros.getQtdVoltas() ) {
+            Carros.setPos(Carros.getPos()+1);
+            this.posChegada = Carros.getPos();
+            Carros.setFinish(Carros.getFinish()+1);
+            Carros.setMsg( "Carro "+this.indice+" chegou na posicao "+this.posChegada + "\n");
+            
+        } else {
+            boolean abastece = pausaAbastecimento();
+            boolean quebra = pausaQuebra();
+            if (!abastece && !quebra) {
+                this.volta++;
+                Carros.setMsg( "Carro "+this.indice+" acelerou e esta na volta "+this.volta + "\n");
+            }else{
+                if(abastece){
+                    Carros.setMsg( "Carro "+this.indice+" parou para abastecer na volta "+this.volta+ "\n");
+                    Thread.yield();
+                }
+                if(quebra){
+                    Carros.setMsg( "Carro "+this.indice+" quebrou na volta "+this.volta + "\n");
                 }
             }
             
         }
-
+        }
+        }
     }
 
     public boolean pausaAbastecimento() {
@@ -70,9 +76,9 @@ public class Carros extends Thread {
 
     public boolean pausaQuebra() {
         double rand = Math.random() * 100;
-        if (rand <= Carros.getpQuebra()) {
+        if (rand <= Carros.getpQuebra()){
             this.posChegada = -1;
-            Carros.setFinish(Carros.getFinish() + 1);
+            Carros.setFinish(Carros.getFinish()+1);
             return true;
         }
         return false;
@@ -122,11 +128,10 @@ public class Carros extends Thread {
         return pos;
     }
 
-    public synchronized static void setPos(int pos) {
+   public synchronized static void setPos(int pos) {
         Carros.pos = pos;    
         
     }
-
     public int getPosChegada() {
         return posChegada;
     }
