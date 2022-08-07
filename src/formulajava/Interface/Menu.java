@@ -7,6 +7,7 @@ package formulajava.Interface;
 import formulajava.Implementaocao.Corrida;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 
 /**
  *
@@ -23,6 +24,28 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+
+    }
+
+    public static synchronized void OutputCorrida(String name) {
+        jTextArea1.setText(jTextArea1.getText() + "\n" + name);
+    }
+
+    public static synchronized void Pos1(String name) {
+        labelP1.setText("Primeiro: " + name);
+    }
+
+    public static synchronized void Pos2(String name) {
+        labelP2.setText("Segundo: " + name);
+    }
+
+    public static synchronized void Pos3(String name) {
+        labelP3.setText("Terceiro: " + name);
+    }
+
+    public static synchronized void setCarro(JLabel carro) {
+        panelCarros.add(carro);
+        panelCarros.repaint();
     }
 
     /**
@@ -49,6 +72,8 @@ public class Menu extends javax.swing.JFrame {
         labelP1 = new javax.swing.JLabel();
         labelP2 = new javax.swing.JLabel();
         labelP3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        panelCarros = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,7 +89,7 @@ public class Menu extends javax.swing.JFrame {
 
         pQuebraField.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(100.0f), Float.valueOf(1.0f)));
 
-        jLabel4.setText("Probabiliadde(%) de Abastecimento");
+        jLabel4.setText("Probabilidade(%) de Abastecimento");
 
         pAbastecimentoField.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(100.0f), Float.valueOf(1.0f)));
 
@@ -88,6 +113,25 @@ public class Menu extends javax.swing.JFrame {
 
         labelP3.setText("Terceiro: ");
 
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        panelCarros.setMaximumSize(new java.awt.Dimension(700, 32767));
+        panelCarros.setMinimumSize(new java.awt.Dimension(700, 100));
+        panelCarros.setPreferredSize(new java.awt.Dimension(700, 500));
+
+        javax.swing.GroupLayout panelCarrosLayout = new javax.swing.GroupLayout(panelCarros);
+        panelCarros.setLayout(panelCarrosLayout);
+        panelCarrosLayout.setHorizontalGroup(
+            panelCarrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 798, Short.MAX_VALUE)
+        );
+        panelCarrosLayout.setVerticalGroup(
+            panelCarrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 698, Short.MAX_VALUE)
+        );
+
+        jScrollPane3.setViewportView(panelCarros);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,14 +139,8 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nCarrosField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(108, 108, 108)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nVoltasField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nCarrosField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jScrollPane1)
@@ -120,43 +158,52 @@ public class Menu extends javax.swing.JFrame {
                             .addGap(32, 32, 32)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel4)
-                                .addComponent(pAbastecimentoField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(pAbastecimentoField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(nVoltasField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2))
                             .addGap(21, 21, 21))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nVoltasField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nCarrosField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pQuebraField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pAbastecimentoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(StartButton)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nVoltasField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nCarrosField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelP1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelP2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelP3)
-                        .addGap(0, 29, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(11, 11, 11)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(pQuebraField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pAbastecimentoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(StartButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelP1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelP2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelP3)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -168,19 +215,23 @@ public class Menu extends javax.swing.JFrame {
         float pAbastece = Float.parseFloat(this.pAbastecimentoField.getValue().toString());
         int qtdCarros = Integer.parseInt(this.nCarrosField.getValue().toString());
         int qtdVoltas = Integer.parseInt(this.nVoltasField.getValue().toString());
-        
+
         Corrida run = new Corrida(qtdCarros, pQuebra, pAbastece, qtdVoltas);
         try {
-            jTextArea1.setText(run.start());
-            String[] top3 = run.top3();
-        labelP1.setText("Primeiro: Carro " + top3[0]);
-        labelP2.setText("Segundo: Carro " +top3[1]);
-        labelP3.setText("Terceiro: Carro "+top3[2]);
+            panelCarros.removeAll();
+            panelCarros.setPreferredSize(new java.awt.Dimension(700, 80 * qtdCarros));
+            panelCarros.repaint();
+
+            jTextArea1.setText("");
+            labelP1.setText("Primeiro: ");
+            labelP2.setText("Segundo: ");
+            labelP3.setText("Terceiro: ");
+            run.start();
         } catch (InterruptedException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
+
     }//GEN-LAST:event_StartButtonActionPerformed
 
     /**
@@ -218,6 +269,7 @@ public class Menu extends javax.swing.JFrame {
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton StartButton;
     private javax.swing.JLabel jLabel1;
@@ -226,13 +278,15 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JLabel labelP1;
-    private javax.swing.JLabel labelP2;
-    private javax.swing.JLabel labelP3;
+    private javax.swing.JScrollPane jScrollPane3;
+    private static javax.swing.JTextArea jTextArea1;
+    private static javax.swing.JLabel labelP1;
+    private static javax.swing.JLabel labelP2;
+    private static javax.swing.JLabel labelP3;
     private javax.swing.JSpinner nCarrosField;
     private javax.swing.JSpinner nVoltasField;
     private javax.swing.JSpinner pAbastecimentoField;
     private javax.swing.JSpinner pQuebraField;
+    private static javax.swing.JPanel panelCarros;
     // End of variables declaration//GEN-END:variables
 }
