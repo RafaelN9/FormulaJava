@@ -5,6 +5,8 @@
 package formulajava.Interface;
 
 import formulajava.Implementaocao.Corrida;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -168,11 +170,16 @@ public class Menu extends javax.swing.JFrame {
         int qtdVoltas = Integer.parseInt(this.nVoltasField.getValue().toString());
         
         Corrida run = new Corrida(qtdCarros, pQuebra, pAbastece, qtdVoltas);
-        jTextArea1.setText(run.start());
-        String[] top3 = run.top3();
+        try {
+            jTextArea1.setText(run.start());
+            String[] top3 = run.top3();
         labelP1.setText("Primeiro: Carro " + top3[0]);
         labelP2.setText("Segundo: Carro " +top3[1]);
         labelP3.setText("Terceiro: Carro "+top3[2]);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
     }//GEN-LAST:event_StartButtonActionPerformed
 
